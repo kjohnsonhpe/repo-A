@@ -1,0 +1,51 @@
+name: Dispatching Workflow
+
+on:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      some_string:
+        description: 'Some random string'
+        required: true
+        type: string
+        default: "example"
+
+
+jobs:
+  Test Things:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump text for baseline
+        run: |
+          echo "This will dump the text for baseline"
+
+      - name: Determine Github Action
+        id: get_action
+        run: |
+          echo "PR number: ${{ github.event.pull_request.number }}"
+          echo "Event action: ${{ github.event.action }}"
+          echo "PR head SHA: ${{ github.event.pull_request.head.sha }}"
+          echo "Workflow run ID: ${{ github.run_id }}"
+          echo "Run attempt: ${{ github.run_attempt }}"
+
+          if [ "${{ github.event.action }}" = "opened" ]; then
+            echo "Initial PR workflow cycle"
+            echo "value=opened" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.action }}" = "synchronize" ]; then
+            echo "Workflow triggered by a subsequent commit"
+            echo "value=synchronize" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.action }}" = "reopened" ]; then
+            echo "PR reopened"
+            echo "value=reopened" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Checkout repo-B
+        uses: actions/checkout@v4
+        with:
+          repository: kevinj_hpeprod/repo-B
+
+      - name: Call workflow
+        if: 1 > 2
+        uses: ./shared-pipeline-actions/actions/validate_cluster_data
+        with:
+          input: "blah"
