@@ -42,10 +42,10 @@ jobs:
       - name: Checkout repo-B
         uses: actions/checkout@v4
         with:
-          repository: kevinj_hpeprod/repo-B
+          repository: kjohnsonhpe/repo-B
 
       - name: Call workflow
         if: 1 > 2
-        uses: ./shared-pipeline-actions/actions/validate_cluster_data
+        uses: ./repo-B/.github/workflows/test_workflow.yaml
         with:
           input: "blah"
