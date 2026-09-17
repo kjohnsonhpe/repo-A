@@ -12,7 +12,7 @@ on:
 
 
 jobs:
-  Test Things:
+  Test_Things:
     runs-on: ubuntu-latest
     steps:
       - name: Dump text for baseline
