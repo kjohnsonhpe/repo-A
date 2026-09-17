@@ -45,7 +45,6 @@ jobs:
           repository: kjohnsonhpe/repo-B
 
       - name: Call workflow
-        if: 1 > 2
         uses: ./repo-B/.github/workflows/test_workflow.yaml
         with:
           input: "blah"
