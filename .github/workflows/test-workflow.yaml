@@ -44,7 +44,7 @@ jobs:
         with:
           repository: kjohnsonhpe/repo-B
 
-      - name: Call workflow
-        uses: kjohnsonhpe/repo-B/.github/workflows/test_workflow.yaml@main
+      - name: Call Action
+        uses: ./repo-B/actions/get-action
         with:
-          input: "blah"
+          input: ${{ steps.get_action.outputs.value }}
