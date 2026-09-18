@@ -51,4 +51,4 @@ jobs:
       - name: Call Action
         uses: ./actions/get-action
         with:
-          input: ${{ steps.get_action.outputs.value }}
+          action: ${{ steps.get_action.outputs.value }}
