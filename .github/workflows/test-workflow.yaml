@@ -44,7 +44,11 @@ jobs:
         with:
           repository: kjohnsonhpe/repo-B
 
+      - name: list stuff
+        run: |
+          ls
+
       - name: Call Action
-        uses: ./repo-B/actions/get-action
+        uses: ./actions/get-action
         with:
           input: ${{ steps.get_action.outputs.value }}
