@@ -12,7 +12,6 @@ on:
 
 # These are nice comments
 # Better
-# Worse
 jobs:
   Test_Things:
     runs-on: ubuntu-latest
